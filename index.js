@@ -3,7 +3,7 @@ const path = require('path')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
 
-// const { sequelize } = require('./models')
+const { sequelize } = require('./models')
 // const indexRouter = require('./routes')
 // const usersRouter = require('./routes/users')
 // const commentsRouter = require('./routes/comments')
@@ -11,17 +11,17 @@ const dotenv = require('dotenv')
 const app = express()
 dotenv.config()
 
-app.set('port', process.env.PORT || 300)
+app.set('port', process.env.PORT || 3001)
 // app.set('view engine', 'html')
 
-// sequelize
-//     .sync({ force: false })
-//     .then(() => {
-//         console.log('데이터베이스 연결 성공')
-//     })
-//     .catch((err) => {
-//         console.error(err)
-//     })
+sequelize
+    .sync({ force: false })
+    .then(() => {
+        console.log('데이터베이스 연결 성공')
+    })
+    .catch((err) => {
+        console.error(err)
+    })
 
 app.use(morgan('dev'))
 // app.use(express.static(path.join(__dirname, 'public'))) // 현재폴더 아래 'public'이라는 폴더에 정적 파일을 제공하겠다는 뜻, 본인은 생략
