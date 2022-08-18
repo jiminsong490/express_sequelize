@@ -1,30 +1,34 @@
-const Sequelize = require('sequelize')
+const { Sequelize, Model, DataTypes } = require('sequelize')
 
-module.exports = class User extends Sequelize.Model {
+module.exports = class User extends Model {
     static init(sequelize) {
         return super.init(
             {
                 name: {
-                    type: Sequelize.STRING(20),
+                    type: DataTypes.STRING(20),
                     allowNull: false,
                     unique: true,
                 },
+                password: {
+                    type: DataTypes.STRING(20),
+                    allowNull: false,
+                },
                 age: {
-                    type: Sequelize.INTEGER.UNSIGNED,
+                    type: DataTypes.INTEGER.UNSIGNED,
                     allowNull: false,
                 },
                 married: {
-                    type: Sequelize.BOOLEAN,
+                    type: DataTypes.BOOLEAN,
                     allowNull: false,
                 },
                 comment: {
-                    type: Sequelize.TEXT,
+                    type: DataTypes.TEXT,
                     allowNull: true,
                 },
                 created_at: {
-                    type: Sequelize.DATE,
+                    type: DataTypes.DATE,
                     allowNull: false,
-                    defaultValue: Sequelize.NOW,
+                    defaultValue: DataTypes.NOW,
                 },
             },
             {

@@ -1,17 +1,17 @@
-const Sequelize = require('sequelize')
+const { Sequelize, Model, DataTypes } = require('sequelize')
 
-module.exports = class Comment extends Sequelize.Model {
+module.exports = class Comment extends Model {
     static init(sequelize) {
         return super.init(
             {
                 comment: {
-                    type: Sequelize.STRING(100),
+                    type: DataTypes.STRING(100),
                     allowNull: false,
                 },
                 created_at: {
-                    type: Sequelize.DATE,
+                    type: DataTypes.DATE,
                     allowNull: true,
-                    defaultValue: Sequelize.NOW,
+                    defaultValue: DataTypes.NOW,
                 },
             },
             {

@@ -4,15 +4,17 @@ const morgan = require('morgan')
 const dotenv = require('dotenv')
 
 const { sequelize } = require('./models')
-// const indexRouter = require('./routes')
-// const usersRouter = require('./routes/users')
+const indexRouter = require('./routes/index')
+const usersRouter = require('./routes/users')
 // const commentsRouter = require('./routes/comments')
 
 const app = express()
 dotenv.config()
 
 app.set('port', process.env.PORT || 3001)
-// app.set('view engine', 'html')
+app.engine('html', require('ejs').renderFile)
+app.set('view engine', 'html')
+app.set('views', path.join(__dirname, 'views'))
 
 sequelize
     .sync({ force: false })
@@ -24,12 +26,12 @@ sequelize
     })
 
 app.use(morgan('dev'))
-// app.use(express.static(path.join(__dirname, 'public'))) // 현재폴더 아래 'public'이라는 폴더에 정적 파일을 제공하겠다는 뜻, 본인은 생략
+app.use(express.static(path.join(__dirname, 'views/front/build'))) // 현재폴더 아래 'public'이라는 폴더에 정적 파일을 제공하겠다는 뜻, 본인은 생략
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// app.use('/', indexRouter)
-// app.use('/users', usersRouter)
+app.use('/', indexRouter)
+app.use('/users', usersRouter)
 // app.use('/comments', commentsRouter)
 
 app.use((req, res, next) => {
