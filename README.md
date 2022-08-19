@@ -5,7 +5,7 @@
 - sequelize : model + assosiate + config 개념, SQL문 -> 시퀄라이즈 쿼리
 - react : useState, useEffect, .map(), fetch()
 
-2. 공부 기간 = 22.08.17 ~ xx
+2. 공부 기간 = 22.08.15 ~ xx
 
 3. 공부하면서 느낀 점
 - 이론적으로 이미 알고있다고 생각했던 곳에서 오류가 자주 발생, 직접 코드를 작성해보기 전에는 정확히 알고 있는것이 아님
