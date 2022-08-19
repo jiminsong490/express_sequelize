@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'views/front/build'))) // 현재폴�
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-app.use('/', indexRouter)
+// app.use('/', indexRouter)
 app.use('/users', usersRouter)
 // app.use('/comments', commentsRouter)
 

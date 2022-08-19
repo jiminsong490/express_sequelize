@@ -18,7 +18,7 @@ const Start = () => {
             const res = await fetch('http://localhost:3000/users/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json', // json이라는 것을 미리 명시 (없으면 req.body가 빈 객체가 될 수 있음)
                 },
                 body: JSON.stringify({ name: name, password: password }),
             })
