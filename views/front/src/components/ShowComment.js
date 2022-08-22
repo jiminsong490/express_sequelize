@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-const ShowUser = () => {
+const ShowComment = () => {
     const [data, setData] = useState([])
     useEffect(() => {
-        getUsers()
+        getComments()
     }, [])
-
-    const getUsers = async () => {
-        const response = await fetch(`${process.env.REACT_APP_URL}/users`)
+    const getComments = async () => {
+        const response = await fetch(`${process.env.REACT_APP_URL}/comments`)
         const res = await response.json()
         setData(res)
     }
@@ -17,8 +16,7 @@ const ShowUser = () => {
             {data.map((value) => {
                 return (
                     <p>
-                        {value.id} | {value.name} | {value.age} |{' '}
-                        {value.married}
+                        {value.id} | {value.comment}
                     </p>
                 )
             })}
@@ -26,4 +24,4 @@ const ShowUser = () => {
     )
 }
 
-export default ShowUser
+export default ShowComment

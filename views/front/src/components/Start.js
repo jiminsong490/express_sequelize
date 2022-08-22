@@ -15,7 +15,7 @@ const Start = () => {
 
     const onClick = async () => {
         if (name !== '' && password !== '') {
-            const res = await fetch('http://localhost:3000/users/', {
+            const res = await fetch(`${process.env.REACT_APP_URL}/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', // json이라는 것을 미리 명시 (없으면 req.body가 빈 객체가 될 수 있음)

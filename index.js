@@ -6,7 +6,7 @@ const dotenv = require('dotenv')
 const { sequelize } = require('./models')
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
-// const commentsRouter = require('./routes/comments')
+const commentsRouter = require('./routes/comments')
 
 const app = express()
 dotenv.config()
@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // app.use('/', indexRouter)
 app.use('/users', usersRouter)
-// app.use('/comments', commentsRouter)
+app.use('/comments', commentsRouter)
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`)
