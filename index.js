@@ -2,8 +2,12 @@ const express = require('express')
 const path = require('path')
 const morgan = require('morgan')
 const dotenv = require('dotenv')
-
+const cookieParser = require('cookie-parser')
+const expressSession = require('express-session')
 const { sequelize } = require('./models')
+const passport = require('passport')
+const sessionStore = require('./session/session')
+
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const commentsRouter = require('./routes/comments')
@@ -30,7 +34,46 @@ app.use(express.static(path.join(__dirname, 'views/front/build'))) // 현재폴�
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// app.use('/', indexRouter)
+app.use(cookieParser(process.env.COOKIE_SECRET))
+app.use(
+    expressSession({
+        resave: false,
+        saveUninitialized: false,
+        secret: process.env.COOKIE_SECRET,
+        store: sessionStore,
+        cookie: {
+            httpOnly: true,
+            secure: false,
+        },
+        name: 'rnbck',
+    })
+)
+// app.use(passport.initialize())
+// app.use(passport.session())
+
+// const User = require('./models/user')
+
+// passport.serializeUser((user, done) => {
+//     done(null, user.id)
+//     console.log(user)
+// })
+// passport.deserializeUser((id, done) => {
+//     try {
+//         const user = User.findOne({
+//             where: { id },
+//         })
+
+//         if (!user) {
+//             return done(new Error('no user'))
+//         }
+//         return done(null, user)
+//     } catch (e) {
+//         console.error(e)
+//         return done(e)
+//     }
+// })
+
+app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/comments', commentsRouter)
 

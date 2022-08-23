@@ -1,4 +1,5 @@
 const express = require('express')
+const passport = require('passport')
 const router = express.Router()
 
 const User = require('../models/user')
@@ -7,6 +8,9 @@ router
     .route('/')
     .get(async (req, res, next) => {
         try {
+            if (req.session.num === undefined) req.session.num = 1
+            else req.session.num = req.session.num + 1
+            console.log(req.session.num)
             const users = await User.findAll()
             res.json(users)
         } catch (e) {
@@ -15,15 +19,18 @@ router
         }
     })
     .post(async (req, res, next) => {
-        console.log(req.body, 'body')
         try {
-            const user = await User.create({
-                name: req.body.name,
-                password: req.body.password,
-                age: 32,
-                married: true,
+            passport.authenticate('local', {
+                successRedirect: '/',
+                failureRedirect: '/',
             })
-            res.status(201).json(user)
+            // const user = await User.create({
+            //     name: req.body.name,
+            //     password: req.body.password,
+            //     age: 32,
+            //     married: true,
+            // })
+            // res.status(201).json(user)
             // console.log(user)
         } catch (e) {
             console.error(e)
