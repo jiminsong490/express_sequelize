@@ -3,7 +3,7 @@
 1. 목표 = express + sequelize + cookie/session & react를 사용하여 단순한 로그인 가능 게시판 만들기
 - express : 라우터, 미들웨어 개념
 - sequelize : model + assosiate + config 개념, SQL문 -> 시퀄라이즈 쿼리
-- cookie/session : 쿠키와 세션이란, 
+- cookie/session : 쿠키와 세션의 장단점, 동작 방식, 쿠키 서명
 - react : useState, useEffect, .map(), fetch()
 
 2. 공부 기간 = 22.08.15 ~ xx
