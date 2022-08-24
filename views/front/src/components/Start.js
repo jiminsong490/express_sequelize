@@ -29,17 +29,25 @@ const Start = () => {
     return (
         <>
             <div>
-                <input type='email' value={name} onChange={onNameChange} />
+                <input
+                    type='text'
+                    value={name}
+                    name='username'
+                    placeholder='이름'
+                    onChange={onNameChange}
+                />
             </div>
 
             <div>
                 <input
                     type='password'
                     value={password}
+                    name='password'
+                    placeholder='비밀번호'
                     onChange={onPasswordChange}
                 />
             </div>
-            <button onClick={onClick}>login</button>
+            <button onClick={onClick}>회원가입</button>
         </>
     )
 }

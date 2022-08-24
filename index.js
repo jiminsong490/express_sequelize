@@ -6,11 +6,15 @@ const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
 const { sequelize } = require('./models')
 const passport = require('passport')
+const passportConfig = require('./passport/index')
 const sessionStore = require('./session/session')
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const commentsRouter = require('./routes/comments')
+const loginRouter = require('./routes/login')
+const errorRouter = require('./routes/error')
+const localStrategy = require('./passport/localStrategy')
 
 const app = express()
 dotenv.config()
@@ -28,6 +32,7 @@ sequelize
     .catch((err) => {
         console.error(err)
     })
+passportConfig()
 
 app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname, 'views/front/build'))) // 현재폴더 아래 'public'이라는 폴더에 정적 파일을 제공하겠다는 뜻, 본인은 생략
@@ -45,37 +50,18 @@ app.use(
             httpOnly: true,
             secure: false,
         },
-        name: 'rnbck',
+        name: 'session',
     })
 )
-// app.use(passport.initialize())
-// app.use(passport.session())
 
-// const User = require('./models/user')
-
-// passport.serializeUser((user, done) => {
-//     done(null, user.id)
-//     console.log(user)
-// })
-// passport.deserializeUser((id, done) => {
-//     try {
-//         const user = User.findOne({
-//             where: { id },
-//         })
-
-//         if (!user) {
-//             return done(new Error('no user'))
-//         }
-//         return done(null, user)
-//     } catch (e) {
-//         console.error(e)
-//         return done(e)
-//     }
-// })
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/comments', commentsRouter)
+app.use('/login', loginRouter)
+app.use('/error', errorRouter)
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`)
