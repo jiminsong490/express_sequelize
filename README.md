@@ -7,7 +7,9 @@
 - passport : passport.authenticate(get,post로 전달받은 user정보를 뒤로 넘겨줌 && 로그인 성공여부에 따라 redirect해줌) -> new LocalStrategy(넘겨받은 user정보와 저장된 계정 정보를 비교, done으로 넘겨줌) -> passport.serializeUser(처음 세션 생성 시 호출) || passport.deserializeUser(세션이 이미 있다면 호출)
 - react : useState, useEffect, .map(), fetch()
 
-2. 공부 기간 = 22.08.15 ~ xx
+2. 공부 기간 = 22.08.15 ~ 22.08.25
+
+3. 기여도 = 100%
 
 3. 공부하면서 느낀 점
 - 이론적으로 이미 알고있다고 생각했던 곳에서 오류가 자주 발생, 직접 코드를 작성해보기 전에는 정확히 알고 있는것이 아님
