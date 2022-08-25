@@ -1,25 +1,38 @@
 const express = require('express')
 const router = express.Router()
-const { isNotLoggedIn } = require('./middlewares')
+const { isNotLoggedIn, isLoggedIn } = require('./middlewares')
 const passport = require('passport')
 
-router.post('/', isNotLoggedIn, (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        if (err) {
-            console.error(err)
-            return next(err)
-        }
-        if (!user) {
-            return res.redirect(`/error`)
-        }
-        return req.login(user, (loginError) => {
-            if (loginError) {
-                console.error(loginError)
-                return next(loginError)
+router
+    .route('/')
+    .get(isLoggedIn, async (req, res, next) => {
+        req.logout(function (err) {
+            // passport 0.6.0부터 로그아웃 코드 변경
+            if (err) {
+                return next(err)
             }
-            return res.redirect('/')
+            req.session.destroy((err) => {
+                res.redirect('/')
+            })
         })
-    })(req, res, next)
-})
+    })
+    .post(isNotLoggedIn, (req, res, next) => {
+        passport.authenticate('local', (err, user, info) => {
+            if (err) {
+                console.error(err)
+                return next(err)
+            }
+            if (!user) {
+                return res.redirect(`/error`)
+            }
+            return req.login(user, (loginError) => {
+                if (loginError) {
+                    console.error(loginError)
+                    return next(loginError)
+                }
+                return res.redirect('/')
+            })
+        })(req, res, next)
+    })
 
 module.exports = router

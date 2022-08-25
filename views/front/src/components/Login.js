@@ -13,15 +13,11 @@ const Login = () => {
         setPassword(e.target.value)
     }
 
-    // const onClick = async () => {
-    //     const res = await fetch(`${process.env.REACT_APP_URL}/comments`, {
-    //         method: 'post',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ name: name, comment: comment }),
-    //     })
-    // }
+    const onClick = async () => {
+        const res = await fetch(`${process.env.REACT_APP_URL}/login`, {
+            method: 'get',
+        })
+    }
 
     return (
         <>
@@ -46,6 +42,7 @@ const Login = () => {
                 <button type='submit'>로그인</button>
                 <div />
             </form>
+            <button onClick={onClick}>로그아웃</button>
         </>
     )
 }
