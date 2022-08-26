@@ -1,6 +1,6 @@
 # README
 
-1. 목표 = express + sequelize + cookie/session + passport & react를 사용하여 단순한 로그인 가능 게시판 만들기
+1. 목표 = express + sequelize + cookie/session + passport & react를 사용하여 로그인, 로그아웃, 회원가입, 댓글 작성 구현
 - express : 라우터, 미들웨어 개념
 - sequelize : model + assosiate + config 개념, SQL문 -> 시퀄라이즈 쿼리
 - cookie/session : 쿠키와 세션의 장단점, 동작 방식, 쿠키 서명
